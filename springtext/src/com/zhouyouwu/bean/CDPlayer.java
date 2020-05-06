@@ -9,7 +9,7 @@ public class CDPlayer {
     private CompactDisc cd;
 
     @Autowired
-    public void setCd(CompactDisc cd){
+    public CDPlayer(CompactDisc cd){
         this.cd = cd;
     }
 

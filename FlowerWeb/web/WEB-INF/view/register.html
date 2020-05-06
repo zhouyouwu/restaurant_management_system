@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>reg</title>
+    <script th:src="@{/static/js/jquery-3.4.1.min.js}"></script>
+</head>
+<body>
+
+    <form method="post" th:action="@{/register.action}" th:object="${userBean}">
+        <span>用户id：</span><input type="text" value="8-11个字符" id="userId" th:field="*{userId}"
+                                 onclick="if(value=='8-11个字符')value=''"><br/>
+        <span>昵称：</span><input type="text" value="2-12个字符" id="username" th:field="*{username}"
+                               onclick="value=''"><br/>
+        <span>密码：</span><input type="password" value="8-16个字符" id="password" th:field="*{password}"
+                               onclick="value=''"><br/>
+        <span>确认密码：</span><input type="password" value="8-16个字符" id="password2" onclick="value=''"><br/>
+
+        <input type="submit" value="注册">
+    </form>
+</body>
+</html>
