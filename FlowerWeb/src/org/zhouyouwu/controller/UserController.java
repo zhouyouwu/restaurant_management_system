@@ -1,13 +1,12 @@
 package org.zhouyouwu.controller;
 
+import lombok.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.zhouyouwu.beans.UserBean;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.zhouyouwu.service.RegisterService;
 
 @Controller
 public class UserController {
@@ -19,9 +18,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void register(HttpServletRequest request, HttpServletResponse response){
-        String userId = request.getParameter("userId");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+    public void register(UserBean userBean){
+        //System.out.println(userBean.getUserId());
+        //System.out.println(userBean.getUsername());
+        //System.out.println(userBean.getPassword());
+        System.out.println(userBean.getUserId());
+        //RegisterService.addUser(user);
+        //RegisterService.selectUser();
     }
 }

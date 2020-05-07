@@ -27,6 +27,11 @@
           p:characterEncoding="utf-8"
           p:templateMode="HTML5"/>
 
+<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver"-->
+<!--          p:suffix=".jsp"-->
+<!--          p:prefix="/WEB-INF/view/"-->
+<!--          />-->
+
     <bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
 
     <context:component-scan base-package="org.zhouyouwu.controller"/>
