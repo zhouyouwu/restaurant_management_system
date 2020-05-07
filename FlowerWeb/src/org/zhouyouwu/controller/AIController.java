@@ -14,6 +14,11 @@ import org.zhouyouwu.service.PlantService;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class AIController {
 
+    /**图片文件处理
+     * 保存，提交百度云，接收结果
+     * @param multipartFile
+     * @return
+     */
     @RequestMapping("/upFile")
     public String upFile(@RequestParam("imageFile") MultipartFile multipartFile){
         System.out.println("ok");

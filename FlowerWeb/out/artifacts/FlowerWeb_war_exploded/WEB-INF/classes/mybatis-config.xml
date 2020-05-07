@@ -21,7 +21,7 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="org.zhouyouwu.mapper.UserMapper.xml"/>
+        <mapper resource="UserMapper.xml"/>
     </mappers>
 
 </configuration>
