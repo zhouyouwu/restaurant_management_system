@@ -20,6 +20,7 @@
           <element id="library" level="project" name="org.mybatis:mybatis-spring:2.0.4" />
           <element id="library" level="project" name="org.mybatis:mybatis:3.5.4" />
           <element id="library" level="project" name="mysql:mysql-connector-java:8.0.20" />
+          <element id="library" level="project" name="com.google.code.gson:gson:2.8.6" />
         </element>
       </element>
     </root>

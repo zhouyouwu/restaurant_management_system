@@ -15,16 +15,16 @@ import java.util.List;
 public class UserController {
     @RequestMapping(value = "/hello")
     public String hello(Model model){
-        List<UserBean> userBeanList = RegisterService.selectUserList();
-        for(UserBean user: userBeanList){
-            System.out.println(user.getUserId());
-            System.out.println(user.getUsername());
-            System.out.println(user.getPassword());
-            System.out.println("");
-        }
-        UserBean user = RegisterService.selectUser("1247721255");
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
+//        List<UserBean> userBeanList = RegisterService.selectUserList();
+//        for(UserBean user: userBeanList){
+//            System.out.println(user.getUserId());
+//            System.out.println(user.getUsername());
+//            System.out.println(user.getPassword());
+//            System.out.println("");
+//        }
+//        UserBean user = RegisterService.selectUser("1247721255");
+//        System.out.println(user.getUsername());
+//        System.out.println(user.getPassword());
         return "register";
     }
 

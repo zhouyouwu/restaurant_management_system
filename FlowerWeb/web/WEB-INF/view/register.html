@@ -7,14 +7,15 @@
 </head>
 <body>
 
-    <form method="post" th:action="@{register.action}" th:object="${userBean}">
-        <span>用户id：</span><input type="text" value="8-11个字符" name="userId" th:field="*{userId}"
+    <form method="post" action="register.action">
+        <span>用户id：</span><input type="text" value="8-11个字符" name="userId"
                                  onclick="if(value=='8-11个字符')value=''"><br/>
-        <span>昵称：</span><input type="text" value="2-12个字符" name="username" th:field="*{username}"
+        <span>昵称：</span><input type="text" value="2-12个字符" name="username"
                                onclick="value=''"><br/>
-        <span>密码：</span><input type="password" value="8-16个字符" name="password" th:field="*{password}"
+        <span>密码：</span><input type="password" value="8-16个字符" name="password"
                                onclick="value=''"><br/>
-        <span>确认密码：</span><input type="password" value="8-16个字符" name="password2" onclick="value=''"><br/>
+        <span>确认密码：</span><input type="password" value="8-16个字符" name="password2"
+                                 onclick="value=''"><br/>
 
         <input type="submit" value="注册">
     </form>

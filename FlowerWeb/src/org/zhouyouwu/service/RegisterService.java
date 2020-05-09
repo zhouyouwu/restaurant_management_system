@@ -33,7 +33,7 @@ public class RegisterService {
             int rusultInt = userMapper.addUser(user);
             sqlSession.commit();
             System.out.println(rusultInt);
-
+            sqlSession.close();
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -55,6 +55,7 @@ public class RegisterService {
 
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
             List<UserBean> userList = userMapper.selectUserList();
+            sqlSession.close();
             return userList;
         }catch (IOException e){
             e.printStackTrace();
@@ -75,6 +76,7 @@ public class RegisterService {
 
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
             UserBean userList = userMapper.selectUser(userId);
+            sqlSession.close();
             return userList;
 
         }catch (IOException e){
