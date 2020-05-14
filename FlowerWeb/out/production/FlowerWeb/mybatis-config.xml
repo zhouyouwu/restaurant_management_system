@@ -6,7 +6,7 @@
 <configuration>
     <properties resource="mybatis.properties"/>
     <typeAliases>
-<!--可以设置别名，用于简化javabean引用，可以具体到某个类<type=>，也可以只到包，然后用@Alias设置-->
+<!--可以设置别名，用于简化javabean引用，可以具体到某个类<typeAlias alias= type=>，也可以只到包，然后用@Alias设置-->
         <package name="org.zhouyouwu.beans"/>
     </typeAliases>
     <environments default="development">
