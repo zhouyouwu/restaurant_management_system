@@ -37,7 +37,7 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
         <multipart-config>
-            <location>f:/</location>
+            <location>/</location>
             <max-file-size>97902847</max-file-size>
             <max-request-size>99999999</max-request-size>
         </multipart-config>

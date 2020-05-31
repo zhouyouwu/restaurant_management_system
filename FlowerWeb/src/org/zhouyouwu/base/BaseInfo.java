@@ -14,6 +14,6 @@ public class BaseInfo {
     public final static String plant = "https://aip.baidubce.com/rest/2.0/image-classify/v1/plant";
 
     //存储文件夹地址
-    public final static String uri = "/local/temp";
+    public final static String uri = "/usr/local/hudk/appdata";
 
 }

@@ -18,7 +18,7 @@ public class PlantService {
             //把编码变成url字符串
             String stringImage = Base64Util.encode(byteImage);
             stringImage = URLEncoder.encode(stringImage, "utf-8");
-            System.out.println(stringImage);
+
             String param = "image=" + stringImage + "&baike_num=1";
 
             String token = AuthService.getToken();

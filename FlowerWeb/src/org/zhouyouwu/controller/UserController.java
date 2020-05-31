@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zhouyouwu.beans.UserBean;
+import org.zhouyouwu.mapper.UserMapper;
 import org.zhouyouwu.service.RegisterService;
 
 import javax.validation.Valid;
@@ -38,20 +39,32 @@ public class UserController {
      * @param user
      */
     @Valid
+    @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void register(@NonNull UserBean user){
+    public String register(@NonNull UserBean user){
         System.out.println(user.getUserId());
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
 
         RegisterService.addUser(user);
+        return "{\"message\":\"ok\"}";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public void login(UserBean userBean){
-        //JSONObject jsonObject = JSON.parseObject(json);
-        String userId = userBean.getUserId();//jsonObject.getString("userId");
-        String password = userBean.getPassword();//jsonObject.getString("password");
+    public String login(UserBean userBean){
+        String userId = userBean.getUserId();
+        String password = userBean.getPassword();
         System.out.println(userId);
+        UserBean dbUser = RegisterService.selectUser(userId);
+        if(dbUser!=null){
+            if(password.equals(dbUser.getPassword())){
+                return "{\"message\":\"Login success\",\"username\":\""+dbUser.getUsername()+"\"}";
+            }else {
+                return "{\"message\":\"password err\"}";
+            }
+        }else {
+            return "{\"message\":\"userId err\"}";
+        }
     }
 }
