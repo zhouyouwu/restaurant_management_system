@@ -1,0 +1,27 @@
+server:
+  port: 9191
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: 12345678
+    url: jdbc:mysql://localhost:3306/restaurant_management_system?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      max-active: 5
+      initial-size: 1
+  thymeleaf:
+    suffix: .html
+    prefix: classpath:/templates/
+    mode: HTML5
+    encoding: utf-8
+
+mybatis:
+  mapper-locations: com/team/repository/*.xml
+  type-aliases-package: com.team.entity
+
+pagehelper:
+  helper-dialect: mysql
+  row-bounds-with-count: true
+

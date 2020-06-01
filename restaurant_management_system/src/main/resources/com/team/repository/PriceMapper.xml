@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.repository.PriceMapper" >
+  <resultMap id="BaseResultMap" type="com.team.entity.Price" >
+    <id column="dishes_id" property="dishesId" jdbcType="INTEGER" />
+    <result column="dishes_name" property="dishesName" jdbcType="VARCHAR" />
+    <result column="dishes_imageurl" property="dishesImageurl" jdbcType="VARCHAR" />
+    <result column="dishes_price" property="dishesPrice" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dishes_id, dishes_name, dishes_imageurl, dishes_price
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.team.entity.PriceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from price_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from price_tbl
+    where dishes_id = #{dishesId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from price_tbl
+    where dishes_id = #{dishesId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.team.entity.PriceExample" >
+    delete from price_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.team.entity.Price" >
+    insert into price_tbl (dishes_id, dishes_name, dishes_imageurl, 
+      dishes_price)
+    values (#{dishesId,jdbcType=INTEGER}, #{dishesName,jdbcType=VARCHAR}, #{dishesImageurl,jdbcType=VARCHAR}, 
+      #{dishesPrice,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.team.entity.Price" >
+    insert into price_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dishesId != null" >
+        dishes_id,
+      </if>
+      <if test="dishesName != null" >
+        dishes_name,
+      </if>
+      <if test="dishesImageurl != null" >
+        dishes_imageurl,
+      </if>
+      <if test="dishesPrice != null" >
+        dishes_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dishesId != null" >
+        #{dishesId,jdbcType=INTEGER},
+      </if>
+      <if test="dishesName != null" >
+        #{dishesName,jdbcType=VARCHAR},
+      </if>
+      <if test="dishesImageurl != null" >
+        #{dishesImageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="dishesPrice != null" >
+        #{dishesPrice,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.team.entity.PriceExample" resultType="java.lang.Integer" >
+    select count(*) from price_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update price_tbl
+    <set >
+      <if test="record.dishesId != null" >
+        dishes_id = #{record.dishesId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dishesName != null" >
+        dishes_name = #{record.dishesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dishesImageurl != null" >
+        dishes_imageurl = #{record.dishesImageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dishesPrice != null" >
+        dishes_price = #{record.dishesPrice,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update price_tbl
+    set dishes_id = #{record.dishesId,jdbcType=INTEGER},
+      dishes_name = #{record.dishesName,jdbcType=VARCHAR},
+      dishes_imageurl = #{record.dishesImageurl,jdbcType=VARCHAR},
+      dishes_price = #{record.dishesPrice,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.team.entity.Price" >
+    update price_tbl
+    <set >
+      <if test="dishesName != null" >
+        dishes_name = #{dishesName,jdbcType=VARCHAR},
+      </if>
+      <if test="dishesImageurl != null" >
+        dishes_imageurl = #{dishesImageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="dishesPrice != null" >
+        dishes_price = #{dishesPrice,jdbcType=INTEGER},
+      </if>
+    </set>
+    where dishes_id = #{dishesId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.team.entity.Price" >
+    update price_tbl
+    set dishes_name = #{dishesName,jdbcType=VARCHAR},
+      dishes_imageurl = #{dishesImageurl,jdbcType=VARCHAR},
+      dishes_price = #{dishesPrice,jdbcType=INTEGER}
+    where dishes_id = #{dishesId,jdbcType=INTEGER}
+  </update>
+</mapper>

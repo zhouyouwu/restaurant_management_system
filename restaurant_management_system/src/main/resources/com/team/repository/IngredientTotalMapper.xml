@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.repository.IngredientTotalMapper" >
+  <resultMap id="BaseResultMap" type="com.team.entity.IngredientTotal" >
+    <id column="ingredient_date" property="ingredientDate" jdbcType="DATE" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+    <result column="restaurant_id" property="restaurantId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ingredient_date, details, restaurant_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.team.entity.IngredientTotalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ingredient_total_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.util.Date" >
+    select 
+    <include refid="Base_Column_List" />
+    from ingredient_total_tbl
+    where ingredient_date = #{ingredientDate,jdbcType=DATE}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.util.Date" >
+    delete from ingredient_total_tbl
+    where ingredient_date = #{ingredientDate,jdbcType=DATE}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.team.entity.IngredientTotalExample" >
+    delete from ingredient_total_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.team.entity.IngredientTotal" >
+    insert into ingredient_total_tbl (ingredient_date, details, restaurant_id
+      )
+    values (#{ingredientDate,jdbcType=DATE}, #{details,jdbcType=VARCHAR}, #{restaurantId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.team.entity.IngredientTotal" >
+    insert into ingredient_total_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ingredientDate != null" >
+        ingredient_date,
+      </if>
+      <if test="details != null" >
+        details,
+      </if>
+      <if test="restaurantId != null" >
+        restaurant_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ingredientDate != null" >
+        #{ingredientDate,jdbcType=DATE},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantId != null" >
+        #{restaurantId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.team.entity.IngredientTotalExample" resultType="java.lang.Integer" >
+    select count(*) from ingredient_total_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ingredient_total_tbl
+    <set >
+      <if test="record.ingredientDate != null" >
+        ingredient_date = #{record.ingredientDate,jdbcType=DATE},
+      </if>
+      <if test="record.details != null" >
+        details = #{record.details,jdbcType=VARCHAR},
+      </if>
+      <if test="record.restaurantId != null" >
+        restaurant_id = #{record.restaurantId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ingredient_total_tbl
+    set ingredient_date = #{record.ingredientDate,jdbcType=DATE},
+      details = #{record.details,jdbcType=VARCHAR},
+      restaurant_id = #{record.restaurantId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.team.entity.IngredientTotal" >
+    update ingredient_total_tbl
+    <set >
+      <if test="details != null" >
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="restaurantId != null" >
+        restaurant_id = #{restaurantId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ingredient_date = #{ingredientDate,jdbcType=DATE}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.team.entity.IngredientTotal" >
+    update ingredient_total_tbl
+    set details = #{details,jdbcType=VARCHAR},
+      restaurant_id = #{restaurantId,jdbcType=INTEGER}
+    where ingredient_date = #{ingredientDate,jdbcType=DATE}
+  </update>
+</mapper>

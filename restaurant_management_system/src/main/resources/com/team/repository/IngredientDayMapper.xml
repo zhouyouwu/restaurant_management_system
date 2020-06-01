@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.repository.IngredientDayMapper" >
+  <resultMap id="BaseResultMap" type="com.team.entity.IngredientDay" >
+    <id column="ingredient_id" property="ingredientId" jdbcType="INTEGER" />
+    <result column="ingredient_date" property="ingredientDate" jdbcType="DATE" />
+    <result column="ingredient_name" property="ingredientName" jdbcType="VARCHAR" />
+    <result column="ingredient_count" property="ingredientCount" jdbcType="REAL" />
+    <result column="ingredient_price" property="ingredientPrice" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ingredient_id, ingredient_date, ingredient_name, ingredient_count, ingredient_price
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.team.entity.IngredientDayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ingredient_day_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ingredient_day_tbl
+    where ingredient_id = #{ingredientId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ingredient_day_tbl
+    where ingredient_id = #{ingredientId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.team.entity.IngredientDayExample" >
+    delete from ingredient_day_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.team.entity.IngredientDay" >
+    insert into ingredient_day_tbl (ingredient_id, ingredient_date, ingredient_name, 
+      ingredient_count, ingredient_price)
+    values (#{ingredientId,jdbcType=INTEGER}, #{ingredientDate,jdbcType=DATE}, #{ingredientName,jdbcType=VARCHAR}, 
+      #{ingredientCount,jdbcType=REAL}, #{ingredientPrice,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.team.entity.IngredientDay" >
+    insert into ingredient_day_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ingredientId != null" >
+        ingredient_id,
+      </if>
+      <if test="ingredientDate != null" >
+        ingredient_date,
+      </if>
+      <if test="ingredientName != null" >
+        ingredient_name,
+      </if>
+      <if test="ingredientCount != null" >
+        ingredient_count,
+      </if>
+      <if test="ingredientPrice != null" >
+        ingredient_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ingredientId != null" >
+        #{ingredientId,jdbcType=INTEGER},
+      </if>
+      <if test="ingredientDate != null" >
+        #{ingredientDate,jdbcType=DATE},
+      </if>
+      <if test="ingredientName != null" >
+        #{ingredientName,jdbcType=VARCHAR},
+      </if>
+      <if test="ingredientCount != null" >
+        #{ingredientCount,jdbcType=REAL},
+      </if>
+      <if test="ingredientPrice != null" >
+        #{ingredientPrice,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.team.entity.IngredientDayExample" resultType="java.lang.Integer" >
+    select count(*) from ingredient_day_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ingredient_day_tbl
+    <set >
+      <if test="record.ingredientId != null" >
+        ingredient_id = #{record.ingredientId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ingredientDate != null" >
+        ingredient_date = #{record.ingredientDate,jdbcType=DATE},
+      </if>
+      <if test="record.ingredientName != null" >
+        ingredient_name = #{record.ingredientName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ingredientCount != null" >
+        ingredient_count = #{record.ingredientCount,jdbcType=REAL},
+      </if>
+      <if test="record.ingredientPrice != null" >
+        ingredient_price = #{record.ingredientPrice,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ingredient_day_tbl
+    set ingredient_id = #{record.ingredientId,jdbcType=INTEGER},
+      ingredient_date = #{record.ingredientDate,jdbcType=DATE},
+      ingredient_name = #{record.ingredientName,jdbcType=VARCHAR},
+      ingredient_count = #{record.ingredientCount,jdbcType=REAL},
+      ingredient_price = #{record.ingredientPrice,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.team.entity.IngredientDay" >
+    update ingredient_day_tbl
+    <set >
+      <if test="ingredientDate != null" >
+        ingredient_date = #{ingredientDate,jdbcType=DATE},
+      </if>
+      <if test="ingredientName != null" >
+        ingredient_name = #{ingredientName,jdbcType=VARCHAR},
+      </if>
+      <if test="ingredientCount != null" >
+        ingredient_count = #{ingredientCount,jdbcType=REAL},
+      </if>
+      <if test="ingredientPrice != null" >
+        ingredient_price = #{ingredientPrice,jdbcType=REAL},
+      </if>
+    </set>
+    where ingredient_id = #{ingredientId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.team.entity.IngredientDay" >
+    update ingredient_day_tbl
+    set ingredient_date = #{ingredientDate,jdbcType=DATE},
+      ingredient_name = #{ingredientName,jdbcType=VARCHAR},
+      ingredient_count = #{ingredientCount,jdbcType=REAL},
+      ingredient_price = #{ingredientPrice,jdbcType=REAL}
+    where ingredient_id = #{ingredientId,jdbcType=INTEGER}
+  </update>
+</mapper>
