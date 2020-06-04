@@ -91,6 +91,39 @@
     from user_tbl
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
+  <select id="selectByEntity" resultMap="BaseResultMap" parameterType="com.team.entity.User">
+    select
+    <include refid="Base_Column_List"/>
+    from user_tbl
+    <where>
+      <if test="userId != null">
+        user_id = #{userId}
+      </if>
+      <if test="password != null">
+        and password = #{password}
+      </if>
+      <if test="authority != null">
+        and authority = #{authority}
+      </if>
+      <if test="entryDate != null">
+        and entry_date = #{entryDate}
+      </if>
+      <if test="workDate != null">
+        and work_date = #{workDate}
+      </if>
+      <if test="salary != null">
+        and salary = #{salary}
+      </if>
+      <if test="restaurantId != null">
+        and restaurant_id = #{restaurantId}
+      </if>
+    </where>
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user_tbl
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user_tbl
     where user_id = #{userId,jdbcType=INTEGER}

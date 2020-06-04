@@ -30,13 +30,6 @@ public class RestaurantController {
      *         "restaurantAddress": "四川省会东县",
      *         "restaurantPhone": 13356478914,
      *         "discount": 8.0
-     *     },
-     *     {
-     *         "restaurantId": 2,
-     *         "restaurantName": "西餐厅",
-     *         "restaurantAddress": "上海市",
-     *         "restaurantPhone": 13356478914,
-     *         "discount": 10.0
      *     }
      * ]
      */

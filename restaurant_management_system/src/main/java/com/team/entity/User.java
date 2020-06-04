@@ -1,6 +1,8 @@
 package com.team.entity;
 
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.sql.Date;
 
 public class User {
     private Integer userId;
@@ -9,6 +11,7 @@ public class User {
 
     private Integer authority;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date entryDate;
 
     private Integer workDate;

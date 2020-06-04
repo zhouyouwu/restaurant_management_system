@@ -14,7 +14,7 @@ spring:
   thymeleaf:
     suffix: .html
     prefix: classpath:/templates/
-    mode: HTML5
+    mode: HTML
     encoding: utf-8
 
 mybatis:
