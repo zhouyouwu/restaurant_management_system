@@ -91,34 +91,6 @@
     from user_tbl
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
-  <select id="selectByEntity" resultMap="BaseResultMap" parameterType="com.team.entity.User">
-    select
-    <include refid="Base_Column_List"/>
-    from user_tbl
-    <where>
-      <if test="userId != null">
-        user_id = #{userId}
-      </if>
-      <if test="password != null">
-        and password = #{password}
-      </if>
-      <if test="authority != null">
-        and authority = #{authority}
-      </if>
-      <if test="entryDate != null">
-        and entry_date = #{entryDate}
-      </if>
-      <if test="workDate != null">
-        and work_date = #{workDate}
-      </if>
-      <if test="salary != null">
-        and salary = #{salary}
-      </if>
-      <if test="restaurantId != null">
-        and restaurant_id = #{restaurantId}
-      </if>
-    </where>
-  </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -134,7 +106,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.team.entity.User" >
+  <insert id="insert" parameterType="com.team.entity.User" keyProperty="userId" useGeneratedKeys="true">
     insert into user_tbl (user_id, password, authority, 
       entry_date, work_date, salary, 
       restaurant_id)

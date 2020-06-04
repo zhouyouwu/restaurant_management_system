@@ -58,10 +58,9 @@ public class UserController {
     @PostMapping(value = "/addUser")
     public String addUser(@RequestBody User user){
         user.setEntryDate(new Date(System.currentTimeMillis()));
-        int flog = userMapper.insertSelective(user);
+        int flog = userMapper.insert(user);
         if(flog > 0){
-            User newUser = userMapper.selectByEntity(user);
-            return gson.toJson(newUser);
+            return gson.toJson(userMapper.selectByPrimaryKey(user.getUserId()));
         }else {
             return "{\"userId\": -1}";
         }
@@ -81,8 +80,7 @@ public class UserController {
         }
         int flog = userMapper.updateByPrimaryKeySelective(user);
         if(flog > 0){
-            User newUser = userMapper.selectByEntity(user);
-            return gson.toJson(newUser);
+            return gson.toJson(userMapper.selectByPrimaryKey(user.getUserId()));
         }else {
             return "{\"userId\": -1,\"message\":\"没有成功\"}";
         }

@@ -7,6 +7,8 @@ public class Shopping {
 
     private Integer dishesId;
 
+    private Integer dishesCount;
+
     public Integer getShoppingId() {
         return shoppingId;
     }
@@ -29,5 +31,13 @@ public class Shopping {
 
     public void setDishesId(Integer dishesId) {
         this.dishesId = dishesId;
+    }
+
+    public Integer getDishesCount() {
+        return dishesCount;
+    }
+
+    public void setDishesCount(Integer dishesCount) {
+        this.dishesCount = dishesCount;
     }
 }

@@ -88,6 +88,11 @@
     from price_tbl
     where dishes_id = #{dishesId,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from price_tbl
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from price_tbl
     where dishes_id = #{dishesId,jdbcType=INTEGER}
@@ -98,7 +103,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.team.entity.Price" >
+  <insert id="insert" parameterType="com.team.entity.Price" keyProperty="dishesId" useGeneratedKeys="true">
     insert into price_tbl (dishes_id, dishes_name, dishes_imageurl, 
       dishes_price)
     values (#{dishesId,jdbcType=INTEGER}, #{dishesName,jdbcType=VARCHAR}, #{dishesImageurl,jdbcType=VARCHAR}, 

@@ -55,10 +55,9 @@ public class RestaurantController {
      */
     @PostMapping(value = "/addRestaurant")
     public String addRestaurant(@RequestBody Restaurant restaurant){
-        int flog = restaurantMapper.insertSelective(restaurant);
+        int flog = restaurantMapper.insert(restaurant);
         if(flog > 0){
-            Restaurant newRestaurant = restaurantMapper.selectByEntity(restaurant);
-            return gson.toJson(newRestaurant);
+            return gson.toJson(restaurantMapper.selectByPrimaryKey(restaurant.getRestaurantId()));
         }else {
             return "{\"restaurantId\": -1}";
         }
@@ -75,8 +74,7 @@ public class RestaurantController {
     public String updateRestaurant(@RequestBody Restaurant restaurant){
         int flog = restaurantMapper.updateByPrimaryKey(restaurant);
         if(flog > 0){
-            Restaurant newRestaurant = restaurantMapper.selectByEntity(restaurant);
-            return gson.toJson(newRestaurant);
+            return gson.toJson(restaurantMapper.selectByPrimaryKey(restaurant.getRestaurantId()));
         }else {
             return "{\"restaurantId\": -1}";
         }

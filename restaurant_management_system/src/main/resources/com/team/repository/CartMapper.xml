@@ -89,7 +89,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.team.entity.Cart" >
+  <insert id="insert" parameterType="com.team.entity.Cart" useGeneratedKeys="true" keyProperty="cartId">
     insert into cart_tbl (cart_id)
     values (#{cartId,jdbcType=INTEGER})
   </insert>

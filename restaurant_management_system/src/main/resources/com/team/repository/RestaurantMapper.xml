@@ -89,20 +89,6 @@
     from restaurant_tbl
     where restaurant_id = #{restaurantId,jdbcType=INTEGER}
   </select>
-  <select id="selectByEntity" resultMap="BaseResultMap" parameterType="com.team.entity.Restaurant">
-    select
-    <include refid="Base_Column_List" />
-    from restaurant_tbl
-    <where>
-      <if test="restaurantId != null">
-        restaurant_id = #{restaurantId}
-      </if>
-      and restaurant_name = #{restaurantName}
-      and restaurant_phone = #{restaurantPhone}
-      and restaurant_address = #{restaurantAddress}
-      and discount = #{discount}
-    </where>
-  </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -118,7 +104,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.team.entity.Restaurant" >
+  <insert id="insert" parameterType="com.team.entity.Restaurant" keyProperty="restaurantId" useGeneratedKeys="true">
     insert into restaurant_tbl (restaurant_id, restaurant_name, restaurant_address, 
       restaurant_phone, discount)
     values (#{restaurantId,jdbcType=INTEGER}, #{restaurantName,jdbcType=VARCHAR}, #{restaurantAddress,jdbcType=VARCHAR}, 

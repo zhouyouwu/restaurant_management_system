@@ -12,6 +12,8 @@ public interface ShoppingMapper {
 
     int deleteByPrimaryKey(Integer shoppingId);
 
+    int deleteByEntity(Shopping shopping);//添加
+
     int insert(Shopping record);
 
     int insertSelective(Shopping record);
@@ -20,6 +22,8 @@ public interface ShoppingMapper {
 
     Shopping selectByPrimaryKey(Integer shoppingId);
 
+    List<Shopping> selectByCartId(Integer cartId);//添加
+
     int updateByExampleSelective(@Param("record") Shopping record, @Param("example") ShoppingExample example);
 
     int updateByExample(@Param("record") Shopping record, @Param("example") ShoppingExample example);
@@ -27,4 +31,6 @@ public interface ShoppingMapper {
     int updateByPrimaryKeySelective(Shopping record);
 
     int updateByPrimaryKey(Shopping record);
+
+    int updateCountByEntity(Shopping shopping);//添加
 }

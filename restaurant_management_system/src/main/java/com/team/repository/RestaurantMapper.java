@@ -21,9 +21,7 @@ public interface RestaurantMapper {
 
     Restaurant selectByPrimaryKey(Integer restaurantId);
 
-    Restaurant selectByEntity(Restaurant restaurant);
-
-    List<Restaurant> selectAll();
+    List<Restaurant> selectAll();//添加
 
     int updateByExampleSelective(@Param("record") Restaurant record, @Param("example") RestaurantExample example);
 

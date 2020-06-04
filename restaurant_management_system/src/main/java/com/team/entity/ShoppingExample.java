@@ -283,6 +283,66 @@ public class ShoppingExample {
             addCriterion("dishes_id not between", value1, value2, "dishesId");
             return (Criteria) this;
         }
+
+        public Criteria andDishesCountIsNull() {
+            addCriterion("dishes_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesCountIsNotNull() {
+            addCriterion("dishes_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesCountEqualTo(Integer value) {
+            addCriterion("dishes_count =", value, "dishesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesCountNotEqualTo(Integer value) {
+            addCriterion("dishes_count <>", value, "dishesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesCountGreaterThan(Integer value) {
+            addCriterion("dishes_count >", value, "dishesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("dishes_count >=", value, "dishesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesCountLessThan(Integer value) {
+            addCriterion("dishes_count <", value, "dishesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesCountLessThanOrEqualTo(Integer value) {
+            addCriterion("dishes_count <=", value, "dishesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesCountIn(List<Integer> values) {
+            addCriterion("dishes_count in", values, "dishesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesCountNotIn(List<Integer> values) {
+            addCriterion("dishes_count not in", values, "dishesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesCountBetween(Integer value1, Integer value2) {
+            addCriterion("dishes_count between", value1, value2, "dishesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDishesCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("dishes_count not between", value1, value2, "dishesCount");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -12,7 +12,7 @@ public interface CartMapper {
 
     int deleteByPrimaryKey(Integer cartId);
 
-    int insert(Cart record);
+    int insert(Cart record);//修改
 
     int insertSelective(Cart record);
 

@@ -20,9 +20,7 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer userId);
 
-    User selectByEntity(User user);
-
-    List<User> selectAll();
+    List<User> selectAll();//添加
 
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 

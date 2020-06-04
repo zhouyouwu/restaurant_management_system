@@ -20,6 +20,8 @@ public interface PriceMapper {
 
     Price selectByPrimaryKey(Integer dishesId);
 
+    List<Price> selectAll();//添加
+
     int updateByExampleSelective(@Param("record") Price record, @Param("example") PriceExample example);
 
     int updateByExample(@Param("record") Price record, @Param("example") PriceExample example);

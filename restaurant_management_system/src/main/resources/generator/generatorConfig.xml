@@ -51,7 +51,7 @@
 <!--        <table tableName="ingredient_total_tbl" domainObjectName="IngredientTotal"/>-->
 <!--        <table tableName="order_tbl" domainObjectName="Order"/>-->
 <!--        <table tableName="price_tbl" domainObjectName="Price"/>-->
-        <table tableName="restaurant_tbl" domainObjectName="Restaurant"/>
+        <table tableName="shopping_tbl" domainObjectName="Shopping"/>
 <!--        <table tableName="shopping_tbl" domainObjectName="Shopping"/>-->
 <!--        <table tableName="user_tbl" domainObjectName="User"/>-->
     </context>
