@@ -9,9 +9,7 @@ import com.team.repository.PriceMapper;
 import com.team.repository.RestaurantMapper;
 import com.team.repository.ShoppingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +24,15 @@ public class OrderController {
     @Autowired
     private RestaurantMapper restaurantMapper;
     private final Gson gson = new Gson();
+    private int flog;
 
-    @GetMapping(value = "/addOrder")
+    @GetMapping(value = "/getOrder")
+    public String getOrder(){
+        List<Order> orderList = orderMapper.selectAll();
+        return gson.toJson(orderList);
+    }
+
+    @PostMapping(value = "/addOrder")
     public String addOrder(@RequestBody Order order){
         List<Shopping> shoppingList = shoppingMapper.selectByCartId(order.getCartId());
         float orderTotal = 0;
@@ -40,10 +45,25 @@ public class OrderController {
 
         order.setOrderDiscount(restaurantMapper.selectByPrimaryKey(order.getRestaurantId()).getDiscount());
         if(order.getOrderTotal() == orderTotal*order.getOrderDiscount()*0.1){
-            orderMapper.insert(order);
-            return gson.toJson(orderMapper.selectByPrimaryKey(order.getOrderId()));
+            flog = orderMapper.insert(order);
+            if (flog > 0){
+                return gson.toJson(orderMapper.selectByPrimaryKey(order.getOrderId()));
+            }else {
+                return "{\"orderId\":-1}";
+            }
+
         }else {
             return "{\"orderId\":-1,\"total\":"+orderTotal*order.getOrderDiscount()*0.1+"}";
+        }
+    }
+
+    @GetMapping(value = "/deleteOrder")
+    public String deleteOrder(@RequestParam Integer orderId){
+        flog = orderMapper.deleteByPrimaryKey(orderId);
+        if(flog > 0){
+            return "{\"orderId\":0}";
+        }else {
+            return "{\"orderId\":-1}";
         }
     }
 }

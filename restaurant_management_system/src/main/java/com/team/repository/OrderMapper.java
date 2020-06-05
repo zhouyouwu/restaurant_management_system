@@ -22,6 +22,8 @@ public interface OrderMapper {
 
     Order selectByPrimaryKey(Integer orderId);
 
+    List<Order> selectAll();//添加
+
     int updateByExampleSelective(@Param("record") Order record, @Param("example") OrderExample example);
 
     int updateByExample(@Param("record") Order record, @Param("example") OrderExample example);
