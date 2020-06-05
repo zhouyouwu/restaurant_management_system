@@ -100,7 +100,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.team.entity.Order" >
+  <insert id="insert" parameterType="com.team.entity.Order" keyProperty="orderId" useGeneratedKeys="true">
     insert into order_tbl (order_id, order_discount, order_total, 
       order_receive, restaurant_id, cart_id
       )
@@ -108,7 +108,7 @@
       #{orderReceive,jdbcType=REAL}, #{restaurantId,jdbcType=INTEGER}, #{cartId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.team.entity.Order" >
+  <insert id="insertSelective" parameterType="com.team.entity.Order">
     insert into order_tbl
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >

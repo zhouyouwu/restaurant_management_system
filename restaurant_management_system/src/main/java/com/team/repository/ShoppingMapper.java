@@ -4,7 +4,9 @@ import com.team.entity.Shopping;
 import com.team.entity.ShoppingExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ShoppingMapper {
     int countByExample(ShoppingExample example);
 

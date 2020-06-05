@@ -4,7 +4,9 @@ import com.team.entity.Cart;
 import com.team.entity.CartExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CartMapper {
     int countByExample(CartExample example);
 

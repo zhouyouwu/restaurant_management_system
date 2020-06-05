@@ -4,7 +4,9 @@ import com.team.entity.IngredientDay;
 import com.team.entity.IngredientDayExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface IngredientDayMapper {
     int countByExample(IngredientDayExample example);
 

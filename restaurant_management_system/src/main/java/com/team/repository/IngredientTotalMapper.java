@@ -5,7 +5,9 @@ import com.team.entity.IngredientTotalExample;
 import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface IngredientTotalMapper {
     int countByExample(IngredientTotalExample example);
 

@@ -4,7 +4,9 @@ import com.team.entity.Price;
 import com.team.entity.PriceExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PriceMapper {
     int countByExample(PriceExample example);
 
