@@ -1,6 +1,8 @@
 package com.team.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class OrderExample {
@@ -102,6 +104,32 @@ public class OrderExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value.getTime()), property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
+            if (values == null || values.size() == 0) {
+                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+            }
+            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
+            Iterator<Date> iter = values.iterator();
+            while (iter.hasNext()) {
+                dateList.add(new java.sql.Date(iter.next().getTime()));
+            }
+            addCriterion(condition, dateList, property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andOrderIdIsNull() {
@@ -461,6 +489,136 @@ public class OrderExample {
 
         public Criteria andCartIdNotBetween(Integer value1, Integer value2) {
             addCriterion("cart_id not between", value1, value2, "cartId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsIsNull() {
+            addCriterion("order_details is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsIsNotNull() {
+            addCriterion("order_details is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsEqualTo(String value) {
+            addCriterion("order_details =", value, "orderDetails");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsNotEqualTo(String value) {
+            addCriterion("order_details <>", value, "orderDetails");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsGreaterThan(String value) {
+            addCriterion("order_details >", value, "orderDetails");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsGreaterThanOrEqualTo(String value) {
+            addCriterion("order_details >=", value, "orderDetails");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsLessThan(String value) {
+            addCriterion("order_details <", value, "orderDetails");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsLessThanOrEqualTo(String value) {
+            addCriterion("order_details <=", value, "orderDetails");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsLike(String value) {
+            addCriterion("order_details like", value, "orderDetails");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsNotLike(String value) {
+            addCriterion("order_details not like", value, "orderDetails");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsIn(List<String> values) {
+            addCriterion("order_details in", values, "orderDetails");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsNotIn(List<String> values) {
+            addCriterion("order_details not in", values, "orderDetails");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsBetween(String value1, String value2) {
+            addCriterion("order_details between", value1, value2, "orderDetails");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDetailsNotBetween(String value1, String value2) {
+            addCriterion("order_details not between", value1, value2, "orderDetails");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDateIsNull() {
+            addCriterion("order_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDateIsNotNull() {
+            addCriterion("order_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDateEqualTo(Date value) {
+            addCriterionForJDBCDate("order_date =", value, "orderDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("order_date <>", value, "orderDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDateGreaterThan(Date value) {
+            addCriterionForJDBCDate("order_date >", value, "orderDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("order_date >=", value, "orderDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDateLessThan(Date value) {
+            addCriterionForJDBCDate("order_date <", value, "orderDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("order_date <=", value, "orderDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDateIn(List<Date> values) {
+            addCriterionForJDBCDate("order_date in", values, "orderDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("order_date not in", values, "orderDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("order_date between", value1, value2, "orderDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("order_date not between", value1, value2, "orderDate");
             return (Criteria) this;
         }
     }

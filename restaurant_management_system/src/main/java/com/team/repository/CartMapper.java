@@ -20,6 +20,8 @@ public interface CartMapper {
 
     List<Cart> selectByExample(CartExample example);
 
+    List<Cart> selectAll();//新增
+
     int updateByExampleSelective(@Param("record") Cart record, @Param("example") CartExample example);
 
     int updateByExample(@Param("record") Cart record, @Param("example") CartExample example);

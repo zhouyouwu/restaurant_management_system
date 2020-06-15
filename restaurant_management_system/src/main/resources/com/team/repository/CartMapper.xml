@@ -79,6 +79,11 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from cart_tbl
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from cart_tbl
     where cart_id = #{cartId,jdbcType=INTEGER}

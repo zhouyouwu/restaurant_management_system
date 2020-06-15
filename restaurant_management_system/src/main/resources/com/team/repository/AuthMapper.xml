@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.team.repository.PriceMapper" >
-  <resultMap id="BaseResultMap" type="com.team.entity.Price" >
-    <id column="dishes_id" property="dishesId" jdbcType="INTEGER" />
-    <result column="dishes_name" property="dishesName" jdbcType="VARCHAR" />
-    <result column="dishes_imageurl" property="dishesImageurl" jdbcType="VARCHAR" />
-    <result column="dishes_price" property="dishesPrice" jdbcType="INTEGER" />
+<mapper namespace="com.team.repository.AuthMapper" >
+  <resultMap id="BaseResultMap" type="com.team.entity.Auth" >
+    <id column="auth_id" property="authId" jdbcType="INTEGER" />
+    <result column="auth_value" property="authValue" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,15 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    dishes_id, dishes_name, dishes_imageurl, dishes_price
+    auth_id, auth_value
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.team.entity.PriceExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.team.entity.AuthExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from price_tbl
+    from auth_tbl
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,81 +83,56 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from price_tbl
-    where dishes_id = #{dishesId,jdbcType=INTEGER}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from price_tbl
+    from auth_tbl
+    where auth_id = #{authId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from price_tbl
-    where dishes_id = #{dishesId,jdbcType=INTEGER}
+    delete from auth_tbl
+    where auth_id = #{authId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.team.entity.PriceExample" >
-    delete from price_tbl
+  <delete id="deleteByExample" parameterType="com.team.entity.AuthExample" >
+    delete from auth_tbl
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.team.entity.Price" keyProperty="dishesId" useGeneratedKeys="true">
-    insert into price_tbl (dishes_id, dishes_name, dishes_imageurl, 
-      dishes_price)
-    values (#{dishesId,jdbcType=INTEGER}, #{dishesName,jdbcType=VARCHAR}, #{dishesImageurl,jdbcType=VARCHAR}, 
-      #{dishesPrice,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.team.entity.Auth" >
+    insert into auth_tbl (auth_id, auth_value)
+    values (#{authId,jdbcType=INTEGER}, #{authValue,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.team.entity.Price" >
-    insert into price_tbl
+  <insert id="insertSelective" parameterType="com.team.entity.Auth" >
+    insert into auth_tbl
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="dishesId != null" >
-        dishes_id,
+      <if test="authId != null" >
+        auth_id,
       </if>
-      <if test="dishesName != null" >
-        dishes_name,
-      </if>
-      <if test="dishesImageurl != null" >
-        dishes_imageurl,
-      </if>
-      <if test="dishesPrice != null" >
-        dishes_price,
+      <if test="authValue != null" >
+        auth_value,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="dishesId != null" >
-        #{dishesId,jdbcType=INTEGER},
+      <if test="authId != null" >
+        #{authId,jdbcType=INTEGER},
       </if>
-      <if test="dishesName != null" >
-        #{dishesName,jdbcType=VARCHAR},
-      </if>
-      <if test="dishesImageurl != null" >
-        #{dishesImageurl,jdbcType=VARCHAR},
-      </if>
-      <if test="dishesPrice != null" >
-        #{dishesPrice,jdbcType=INTEGER},
+      <if test="authValue != null" >
+        #{authValue,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.team.entity.PriceExample" resultType="java.lang.Integer" >
-    select count(*) from price_tbl
+  <select id="countByExample" parameterType="com.team.entity.AuthExample" resultType="java.lang.Integer" >
+    select count(*) from auth_tbl
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update price_tbl
+    update auth_tbl
     <set >
-      <if test="record.dishesId != null" >
-        dishes_id = #{record.dishesId,jdbcType=INTEGER},
+      <if test="record.authId != null" >
+        auth_id = #{record.authId,jdbcType=INTEGER},
       </if>
-      <if test="record.dishesName != null" >
-        dishes_name = #{record.dishesName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.dishesImageurl != null" >
-        dishes_imageurl = #{record.dishesImageurl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.dishesPrice != null" >
-        dishes_price = #{record.dishesPrice,jdbcType=INTEGER},
+      <if test="record.authValue != null" >
+        auth_value = #{record.authValue,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -167,32 +140,25 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update price_tbl
-    set dishes_id = #{record.dishesId,jdbcType=INTEGER},
-      dishes_name = #{record.dishesName,jdbcType=VARCHAR},
-      dishes_imageurl = #{record.dishesImageurl,jdbcType=VARCHAR},
-      dishes_price = #{record.dishesPrice,jdbcType=INTEGER}
+    update auth_tbl
+    set auth_id = #{record.authId,jdbcType=INTEGER},
+      auth_value = #{record.authValue,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.team.entity.Price" >
-    update price_tbl
+  <update id="updateByPrimaryKeySelective" parameterType="com.team.entity.Auth" >
+    update auth_tbl
     <set >
-      <if test="dishesImageurl != null" >
-        dishes_imageurl = #{dishesImageurl,jdbcType=VARCHAR},
-      </if>
-      <if test="dishesPrice != null" >
-        dishes_price = #{dishesPrice,jdbcType=INTEGER},
+      <if test="authValue != null" >
+        auth_value = #{authValue,jdbcType=VARCHAR},
       </if>
     </set>
-    where dishes_id = #{dishesId,jdbcType=INTEGER}
+    where auth_id = #{authId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.team.entity.Price" >
-    update price_tbl
-    set dishes_name = #{dishesName,jdbcType=VARCHAR},
-      dishes_imageurl = #{dishesImageurl,jdbcType=VARCHAR},
-      dishes_price = #{dishesPrice,jdbcType=INTEGER}
-    where dishes_id = #{dishesId,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.team.entity.Auth" >
+    update auth_tbl
+    set auth_value = #{authValue,jdbcType=VARCHAR}
+    where auth_id = #{authId,jdbcType=INTEGER}
   </update>
 </mapper>

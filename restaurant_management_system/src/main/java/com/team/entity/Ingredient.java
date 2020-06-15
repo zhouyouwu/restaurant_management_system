@@ -2,7 +2,7 @@ package com.team.entity;
 
 import java.util.Date;
 
-public class IngredientDay {
+public class Ingredient {
     private Integer ingredientId;
 
     private Date ingredientDate;
@@ -12,6 +12,8 @@ public class IngredientDay {
     private Float ingredientCount;
 
     private Float ingredientPrice;
+
+    private Integer addDecrease;
 
     public Integer getIngredientId() {
         return ingredientId;
@@ -51,5 +53,13 @@ public class IngredientDay {
 
     public void setIngredientPrice(Float ingredientPrice) {
         this.ingredientPrice = ingredientPrice;
+    }
+
+    public Integer getAddDecrease() {
+        return addDecrease;
+    }
+
+    public void setAddDecrease(Integer addDecrease) {
+        this.addDecrease = addDecrease;
     }
 }

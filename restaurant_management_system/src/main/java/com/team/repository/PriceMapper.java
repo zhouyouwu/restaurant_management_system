@@ -28,7 +28,7 @@ public interface PriceMapper {
 
     int updateByExample(@Param("record") Price record, @Param("example") PriceExample example);
 
-    int updateByPrimaryKeySelective(Price record);
+    int updateByPrimaryKeySelective(Price record);//删除了可选项菜名，菜名不应该改动
 
     int updateByPrimaryKey(Price record);
 }

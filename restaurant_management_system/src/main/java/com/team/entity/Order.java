@@ -1,5 +1,7 @@
 package com.team.entity;
 
+import java.util.Date;
+
 public class Order {
     private Integer orderId;
 
@@ -12,6 +14,10 @@ public class Order {
     private Integer restaurantId;
 
     private Integer cartId;
+
+    private String orderDetails;
+
+    private Date orderDate;
 
     public Integer getOrderId() {
         return orderId;
@@ -59,5 +65,21 @@ public class Order {
 
     public void setCartId(Integer cartId) {
         this.cartId = cartId;
+    }
+
+    public String getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(String orderDetails) {
+        this.orderDetails = orderDetails == null ? null : orderDetails.trim();
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 }

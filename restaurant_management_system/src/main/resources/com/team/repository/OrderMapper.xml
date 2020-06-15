@@ -8,6 +8,15 @@
     <result column="order_receive" property="orderReceive" jdbcType="REAL" />
     <result column="restaurant_id" property="restaurantId" jdbcType="INTEGER" />
     <result column="cart_id" property="cartId" jdbcType="INTEGER" />
+    <result column="order_details" property="orderDetails" jdbcType="VARCHAR" />
+    <result column="order_date" property="orderDate" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="shoppingDishes" type="com.team.entity.ShoppingDishes">
+    <id column="order_date" property="date"/>
+    <result column="dishes_name" property="dishes"/>
+    <result column="dishes_count" property="count"/>
+    <result column="p.dishes_price*0.1*o.order_discount" property="price"/>
+    <result column="p.dishes_price*0.1*o.order_discount*s.dishes_count" property="total"/>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    order_id, order_discount, order_total, order_receive, restaurant_id, cart_id
+    order_id, order_discount, order_total, order_receive, restaurant_id, cart_id, order_details, 
+    order_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.team.entity.OrderExample" >
     select
@@ -95,6 +105,23 @@
     <include refid="Base_Column_List"/>
     from order_tbl
   </select>
+  <select id="selectByDate" resultMap="BaseResultMap" parameterType="java.sql.Date">
+    select 
+    <include refid="Base_Column_List"/>
+    from order_tbl
+    where order_date = #{orderDate}
+  </select>
+  <select id="selectByDateDishesId" resultMap="shoppingDishes">
+    select
+    o.order_date,p.dishes_name,s.dishes_count,
+    p.dishes_price*0.1*o.order_discount,
+    p.dishes_price*0.1*o.order_discount*s.dishes_count
+    from order_tbl o,shopping_tbl s,price_tbl p
+    where o.order_date = #{orderDate}
+    and o.cart_id = s.cart_id
+    and s.dishes_id = p.dishes_id
+    and p.dishes_id = #{dishesId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from order_tbl
     where order_id = #{orderId,jdbcType=INTEGER}
@@ -107,13 +134,13 @@
   </delete>
   <insert id="insert" parameterType="com.team.entity.Order" keyProperty="orderId" useGeneratedKeys="true">
     insert into order_tbl (order_id, order_discount, order_total, 
-      order_receive, restaurant_id, cart_id
-      )
+      order_receive, restaurant_id, cart_id, 
+      order_details, order_date)
     values (#{orderId,jdbcType=INTEGER}, #{orderDiscount,jdbcType=REAL}, #{orderTotal,jdbcType=REAL}, 
-      #{orderReceive,jdbcType=REAL}, #{restaurantId,jdbcType=INTEGER}, #{cartId,jdbcType=INTEGER}
-      )
+      #{orderReceive,jdbcType=REAL}, #{restaurantId,jdbcType=INTEGER}, #{cartId,jdbcType=INTEGER}, 
+      #{orderDetails,jdbcType=VARCHAR}, #{orderDate,jdbcType=DATE})
   </insert>
-  <insert id="insertSelective" parameterType="com.team.entity.Order">
+  <insert id="insertSelective" parameterType="com.team.entity.Order" >
     insert into order_tbl
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -134,6 +161,12 @@
       <if test="cartId != null" >
         cart_id,
       </if>
+      <if test="orderDetails != null" >
+        order_details,
+      </if>
+      <if test="orderDate != null" >
+        order_date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -153,6 +186,12 @@
       </if>
       <if test="cartId != null" >
         #{cartId,jdbcType=INTEGER},
+      </if>
+      <if test="orderDetails != null" >
+        #{orderDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        #{orderDate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -183,6 +222,12 @@
       <if test="record.cartId != null" >
         cart_id = #{record.cartId,jdbcType=INTEGER},
       </if>
+      <if test="record.orderDetails != null" >
+        order_details = #{record.orderDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderDate != null" >
+        order_date = #{record.orderDate,jdbcType=DATE},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -195,7 +240,9 @@
       order_total = #{record.orderTotal,jdbcType=REAL},
       order_receive = #{record.orderReceive,jdbcType=REAL},
       restaurant_id = #{record.restaurantId,jdbcType=INTEGER},
-      cart_id = #{record.cartId,jdbcType=INTEGER}
+      cart_id = #{record.cartId,jdbcType=INTEGER},
+      order_details = #{record.orderDetails,jdbcType=VARCHAR},
+      order_date = #{record.orderDate,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -218,6 +265,12 @@
       <if test="cartId != null" >
         cart_id = #{cartId,jdbcType=INTEGER},
       </if>
+      <if test="orderDetails != null" >
+        order_details = #{orderDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        order_date = #{orderDate,jdbcType=DATE},
+      </if>
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
@@ -227,7 +280,9 @@
       order_total = #{orderTotal,jdbcType=REAL},
       order_receive = #{orderReceive,jdbcType=REAL},
       restaurant_id = #{restaurantId,jdbcType=INTEGER},
-      cart_id = #{cartId,jdbcType=INTEGER}
+      cart_id = #{cartId,jdbcType=INTEGER},
+      order_details = #{orderDetails,jdbcType=VARCHAR},
+      order_date = #{orderDate,jdbcType=DATE}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -2,7 +2,11 @@ package com.team.repository;
 
 import com.team.entity.Order;
 import com.team.entity.OrderExample;
+
+import java.sql.Date;
 import java.util.List;
+
+import com.team.entity.ShoppingDishes;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +18,7 @@ public interface OrderMapper {
 
     int deleteByPrimaryKey(Integer orderId);
 
-    int insert(Order record);
+    int insert(Order record);//修改
 
     int insertSelective(Order record);
 
@@ -23,6 +27,10 @@ public interface OrderMapper {
     Order selectByPrimaryKey(Integer orderId);
 
     List<Order> selectAll();//添加
+
+    List<Order> selectByDate(Date orderDate);//添加
+
+    List<ShoppingDishes> selectByDateDishesId(@Param("orderDate") Date orderDate, @Param("dishesId") Integer dishesId);//添加 返回点菜的数量
 
     int updateByExampleSelective(@Param("record") Order record, @Param("example") OrderExample example);
 

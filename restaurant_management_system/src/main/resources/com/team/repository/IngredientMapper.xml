@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.team.repository.IngredientDayMapper" >
-  <resultMap id="BaseResultMap" type="com.team.entity.IngredientDay" >
+<mapper namespace="com.team.repository.IngredientMapper" >
+  <resultMap id="BaseResultMap" type="com.team.entity.Ingredient" >
     <id column="ingredient_id" property="ingredientId" jdbcType="INTEGER" />
     <result column="ingredient_date" property="ingredientDate" jdbcType="DATE" />
     <result column="ingredient_name" property="ingredientName" jdbcType="VARCHAR" />
     <result column="ingredient_count" property="ingredientCount" jdbcType="REAL" />
     <result column="ingredient_price" property="ingredientPrice" jdbcType="REAL" />
+    <result column="add_decrease" property="addDecrease" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,9 +68,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ingredient_id, ingredient_date, ingredient_name, ingredient_count, ingredient_price
+    ingredient_id, ingredient_date, ingredient_name, ingredient_count, ingredient_price, 
+    add_decrease
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.team.entity.IngredientDayExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.team.entity.IngredientExample" >
     select
     <if test="distinct" >
       distinct
@@ -89,23 +91,31 @@
     from ingredient_day_tbl
     where ingredient_id = #{ingredientId,jdbcType=INTEGER}
   </select>
+  <select id="selectByDate" resultMap="BaseResultMap" parameterType="java.sql.Date">
+    select
+    <include refid="Base_Column_List"/>
+    from ingredient_day_tbl
+    where ingredient_date = #{ingredientDate}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from ingredient_day_tbl
     where ingredient_id = #{ingredientId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.team.entity.IngredientDayExample" >
+  <delete id="deleteByExample" parameterType="com.team.entity.IngredientExample" >
     delete from ingredient_day_tbl
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.team.entity.IngredientDay" >
+  <insert id="insert" parameterType="com.team.entity.Ingredient" keyProperty="ingredientId" useGeneratedKeys="true">
     insert into ingredient_day_tbl (ingredient_id, ingredient_date, ingredient_name, 
-      ingredient_count, ingredient_price)
+      ingredient_count, ingredient_price, add_decrease
+      )
     values (#{ingredientId,jdbcType=INTEGER}, #{ingredientDate,jdbcType=DATE}, #{ingredientName,jdbcType=VARCHAR}, 
-      #{ingredientCount,jdbcType=REAL}, #{ingredientPrice,jdbcType=REAL})
+      #{ingredientCount,jdbcType=REAL}, #{ingredientPrice,jdbcType=REAL}, #{addDecrease,jdbcType=INTEGER}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.team.entity.IngredientDay" >
+  <insert id="insertSelective" parameterType="com.team.entity.Ingredient" >
     insert into ingredient_day_tbl
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ingredientId != null" >
@@ -122,6 +132,9 @@
       </if>
       <if test="ingredientPrice != null" >
         ingredient_price,
+      </if>
+      <if test="addDecrease != null" >
+        add_decrease,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -140,9 +153,12 @@
       <if test="ingredientPrice != null" >
         #{ingredientPrice,jdbcType=REAL},
       </if>
+      <if test="addDecrease != null" >
+        #{addDecrease,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.team.entity.IngredientDayExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.team.entity.IngredientExample" resultType="java.lang.Integer" >
     select count(*) from ingredient_day_tbl
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -166,6 +182,9 @@
       <if test="record.ingredientPrice != null" >
         ingredient_price = #{record.ingredientPrice,jdbcType=REAL},
       </if>
+      <if test="record.addDecrease != null" >
+        add_decrease = #{record.addDecrease,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,12 +196,13 @@
       ingredient_date = #{record.ingredientDate,jdbcType=DATE},
       ingredient_name = #{record.ingredientName,jdbcType=VARCHAR},
       ingredient_count = #{record.ingredientCount,jdbcType=REAL},
-      ingredient_price = #{record.ingredientPrice,jdbcType=REAL}
+      ingredient_price = #{record.ingredientPrice,jdbcType=REAL},
+      add_decrease = #{record.addDecrease,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.team.entity.IngredientDay" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.team.entity.Ingredient" >
     update ingredient_day_tbl
     <set >
       <if test="ingredientDate != null" >
@@ -197,15 +217,19 @@
       <if test="ingredientPrice != null" >
         ingredient_price = #{ingredientPrice,jdbcType=REAL},
       </if>
+      <if test="addDecrease != null" >
+        add_decrease = #{addDecrease,jdbcType=INTEGER},
+      </if>
     </set>
     where ingredient_id = #{ingredientId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.team.entity.IngredientDay" >
+  <update id="updateByPrimaryKey" parameterType="com.team.entity.Ingredient" >
     update ingredient_day_tbl
     set ingredient_date = #{ingredientDate,jdbcType=DATE},
       ingredient_name = #{ingredientName,jdbcType=VARCHAR},
       ingredient_count = #{ingredientCount,jdbcType=REAL},
-      ingredient_price = #{ingredientPrice,jdbcType=REAL}
+      ingredient_price = #{ingredientPrice,jdbcType=REAL},
+      add_decrease = #{addDecrease,jdbcType=INTEGER}
     where ingredient_id = #{ingredientId,jdbcType=INTEGER}
   </update>
 </mapper>

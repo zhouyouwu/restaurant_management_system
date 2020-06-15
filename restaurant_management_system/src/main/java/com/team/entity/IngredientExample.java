@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class IngredientDayExample {
+public class IngredientExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public IngredientDayExample() {
+    public IngredientExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -439,6 +439,66 @@ public class IngredientDayExample {
 
         public Criteria andIngredientPriceNotBetween(Float value1, Float value2) {
             addCriterion("ingredient_price not between", value1, value2, "ingredientPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDecreaseIsNull() {
+            addCriterion("add_decrease is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDecreaseIsNotNull() {
+            addCriterion("add_decrease is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDecreaseEqualTo(Integer value) {
+            addCriterion("add_decrease =", value, "addDecrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDecreaseNotEqualTo(Integer value) {
+            addCriterion("add_decrease <>", value, "addDecrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDecreaseGreaterThan(Integer value) {
+            addCriterion("add_decrease >", value, "addDecrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDecreaseGreaterThanOrEqualTo(Integer value) {
+            addCriterion("add_decrease >=", value, "addDecrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDecreaseLessThan(Integer value) {
+            addCriterion("add_decrease <", value, "addDecrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDecreaseLessThanOrEqualTo(Integer value) {
+            addCriterion("add_decrease <=", value, "addDecrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDecreaseIn(List<Integer> values) {
+            addCriterion("add_decrease in", values, "addDecrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDecreaseNotIn(List<Integer> values) {
+            addCriterion("add_decrease not in", values, "addDecrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDecreaseBetween(Integer value1, Integer value2) {
+            addCriterion("add_decrease between", value1, value2, "addDecrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDecreaseNotBetween(Integer value1, Integer value2) {
+            addCriterion("add_decrease not between", value1, value2, "addDecrease");
             return (Criteria) this;
         }
     }
